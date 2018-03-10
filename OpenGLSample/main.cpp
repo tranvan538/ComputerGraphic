@@ -12,69 +12,100 @@
 
 #include <string.h>
 #include <cstdlib>
+#include <math.h>
+
+#define PI                3.1415926
+#define WIDTH             600
+#define HEIGHT            600
+#define OUTTER_RADIUS     200
+#define INNER_RADIUS      30
+
+float fX[7], fY[7];
+
+struct Point {
+    float x,y;
+};
 
 void display();
 void init();
+void calVertex();
 
 int main(int argc, char** argv) {
+    calVertex();
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(600, 400);
-    glutInitWindowPosition(100, 150);
-    glutCreateWindow("LAB 1 - (Bai 1)");
-    
+    glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
+    glutInitWindowSize(WIDTH, HEIGHT);
+    glutInitWindowPosition(0, 0);
+    glutCreateWindow("Mercedes‐Benz Logo");
     glutDisplayFunc(display);
     init();
     glutMainLoop();
     return 0;
 }
 
-GLfloat v0[2] = {1,1};
-GLfloat v1[2] = {2,3};
-GLfloat v2[2] = {4,1};
-GLfloat v3[2] = {6,2};
-GLfloat v4[2] = {9,3};
-GLfloat v5[2] = {7,5};
-
 void init() {
     glClearColor(1.0, 1.0, 1.0, 1.0);
-    
+    glColor3f(0.0f, 0.0f, 0.0f);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0.0, 9.0, 0.0, 6.0);
-}
-
-void drawGrid() {
-    glColor3f(0.6f, 0.6f, 0.6f);
-    glLineWidth(1.0);
-    glBegin(GL_LINES);
-    for (int i = 0; i < 9; i++) {
-        glVertex2i(i, 0);
-        glVertex2i(i, 6);
-    }
-    for (int i = 0; i < 6; i++) {
-        glVertex2i(0, i);
-        glVertex2i(9, i);
-    }
-    glEnd();
+    gluOrtho2D(0.0, WIDTH, 0.0, HEIGHT);
 }
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
-    drawGrid();
     glLineWidth(4.0);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glColor3f(0.0f, 0.0f, 0.0f);
-    glBegin(GL_QUAD_STRIP);
-        glVertex2fv(v0);
-        glVertex2fv(v2);
-        glVertex2fv(v1);
-        glVertex2fv(v3);
-        glVertex2fv(v5);
-        glVertex2fv(v4);
-    
+    glBegin(GL_TRIANGLE_FAN);
+        glVertex2i(fX[0], fY[0]);
+        glVertex2i(fX[1], fY[1]);
+        glVertex2i(fX[2], fY[2]);
+        glVertex2i(fX[3], fY[3]);
+        glVertex2i(fX[4], fY[4]);
+        glVertex2i(fX[5], fY[5]);
+        glVertex2i(fX[6], fY[6]);
+        glVertex2i(fX[1], fY[1]);
     glEnd();
     glFlush();
 }
 
+void calVertex() {
+    float radius;
+    float alpha;
+    float inc;
+    
+    float centerX = WIDTH / 2.0;
+    float centerY = HEIGHT / 2.0;
+    
+    fX[0] = centerX;
+    fY[0] = centerY;
+    
+    radius = OUTTER_RADIUS;
+    alpha = PI / 2.0;
+    inc   = 2.0 * PI / 3.0;
+    
+    fX[1] = centerX;
+    fY[1] = centerY + radius;
+    
+    alpha += inc;
+    fX[5] = centerX + radius*cos(alpha);
+    fY[5] = centerY + radius*sin(alpha);
+    
+    alpha += inc;
+    fX[3] = centerX + radius*cos(alpha);
+    fY[3] = centerY + radius*sin(alpha);
+    
+    radius = INNER_RADIUS;
+    alpha = PI / 2.0 - PI / 3.0;
+    fX[2] = centerX + radius*cos(alpha);
+    fY[2] = centerY + radius*sin(alpha);
 
+    alpha += inc;
+    fX[6] = centerX + radius*cos(alpha);
+    fY[6] = centerY + radius*sin(alpha);
+
+    alpha += inc;
+    fX[4] = centerX + radius*cos(alpha);
+    fY[4] = centerY + radius*sin(alpha);
+    
+
+}
