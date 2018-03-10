@@ -73,18 +73,20 @@ void Canvas::moveTo(Point2 p)
 void Canvas::lineTo(float x, float y)
 {
     glBegin(GL_LINES);
-    glVertex2f((GLfloat)CP.getX(), (GLfloat)CP.getX());
+    glVertex2f((GLfloat)CP.getX(), (GLfloat)CP.getY());
     glVertex2f(x, y);
     glEnd();
+    CP.set(x, y);
     glFlush();
 }
 
 void Canvas::lineTo(Point2 p)
 {
     glBegin(GL_LINES);
-    glVertex2f((GLfloat)CP.getX(), (GLfloat)CP.getX());
+    glVertex2f((GLfloat)CP.getX(), (GLfloat)CP.getY());
     glVertex2f((GLfloat)p.getX(), (GLfloat)p.getY());
     glEnd();
+    CP.set(p.getX(), p.getY());
     glFlush();
 }
 
@@ -105,4 +107,17 @@ void Canvas::forward(float dist, int isVisible)
     } else {
         moveTo(x, y);
     }
+}
+
+void Canvas::moveRel(float dx, float dy)
+{
+    CP.set(CP.getX() + dx, CP.getY() + dy);
+}
+
+void Canvas::lineRel(float dx, float dy)
+{
+    float x = CP.getX() + dx;
+    float y = CP.getY() + dy;
+    lineTo(x, y);
+    CP.set(x, y);
 }
