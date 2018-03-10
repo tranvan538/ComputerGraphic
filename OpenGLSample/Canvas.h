@@ -32,6 +32,6 @@ private:
     IntRect     viewport;
     RealRect    window;
     float       CD;
-}
+};
 
 #endif

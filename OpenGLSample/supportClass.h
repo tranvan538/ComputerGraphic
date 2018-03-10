@@ -22,7 +22,7 @@ class Point2
 public:
     Point2() { x = y = 0.0f; }
     Point2(float xx, float yy) { x = xx; y = yy;}
-    void set(float xx, float yy) { x = xx; y = yy};
+    void set(float xx, float yy) { x = xx; y = yy;}
     float getX() { return x; }
     float getY() { return y; }
     void draw() {
@@ -60,5 +60,4 @@ private:
     float l, r, b, t;
 };
 
-#include 
 #endif
