@@ -65,13 +65,13 @@ void display() {
     glLineWidth(4.0);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glColor3f(0.0f, 0.0f, 0.0f);
-    glBegin(GL_TRIANGLES);
+    glBegin(GL_TRIANGLE_STRIP);
         glVertex2fv(v0);
-        glVertex2fv(v1);
         glVertex2fv(v2);
+        glVertex2fv(v1);
         glVertex2fv(v3);
-        glVertex2fv(v4);
         glVertex2fv(v5);
+        glVertex2fv(v4);
     glEnd();
     glFlush();
 }
