@@ -13,15 +13,20 @@
 #include <string.h>
 #include <cstdlib>
 
+#define WIDTH         700
+#define HEIGHT        400
+#define SQUARE        25
+
+
 void display();
 void init();
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(600, 400);
+    glutInitWindowSize(WIDTH, HEIGHT);
     glutInitWindowPosition(100, 150);
-    glutCreateWindow("LAB 1 - (Bai 1)");
+    glutCreateWindow("LAB 1 - (Bai 11)");
     
     glutDisplayFunc(display);
     init();
@@ -29,49 +34,57 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-GLfloat v0[2] = {1,1};
-GLfloat v1[2] = {2,3};
-GLfloat v2[2] = {4,1};
-GLfloat v3[2] = {6,2};
-GLfloat v4[2] = {9,3};
-GLfloat v5[2] = {7,5};
-
 void init() {
     glClearColor(1.0, 1.0, 1.0, 1.0);
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0.0, 9.0, 0.0, 6.0);
-}
-
-void drawGrid() {
-    glColor3f(0.6f, 0.6f, 0.6f);
-    glLineWidth(1.0);
-    glBegin(GL_LINES);
-    for (int i = 0; i < 9; i++) {
-        glVertex2i(i, 0);
-        glVertex2i(i, 6);
-    }
-    for (int i = 0; i < 6; i++) {
-        glVertex2i(0, i);
-        glVertex2i(9, i);
-    }
-    glEnd();
+    gluOrtho2D(0.0, WIDTH / 2, 0.0, HEIGHT / 2);
 }
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
-    drawGrid();
     glLineWidth(4.0);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glColor3f(0.0f, 0.0f, 0.0f);
-    glBegin(GL_TRIANGLES);
-        glVertex2fv(v0);
-        glVertex2fv(v1);
-        glVertex2fv(v2);
-        glVertex2fv(v3);
-        glVertex2fv(v4);
-        glVertex2fv(v5);
+    
+    GLint y = 0;
+    GLint x = 0;
+    
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    while (y < HEIGHT) {
+        glVertex2i(x, y);
+        glVertex2i(HEIGHT, y);
+        y += SQUARE;
+    }
+    glEnd();
+    
+    x = 0;
+    y = 0;
+    glBegin(GL_QUADS);
+    int z = 0;
+    while (y < HEIGHT) {
+        if (z % 2 == 0) {
+            x = SQUARE / 3;
+        } else {
+            x = 2 * SQUARE / 3;
+        }
+        
+        if (z % 4 == 3) {
+            x = 0;
+        }
+
+        while (x < WIDTH) {
+            glVertex2i(x, y);
+            glVertex2i(x + SQUARE, y);
+            glVertex2i(x + SQUARE, y + SQUARE);
+            glVertex2i(x, y + SQUARE);
+            x += 2 * SQUARE;
+        }
+        y += SQUARE;
+        z++;
+    }
     glEnd();
     glFlush();
 }
