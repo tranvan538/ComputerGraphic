@@ -76,5 +76,3 @@ void display() {
     glEnd();
     glFlush();
 }
-
-
