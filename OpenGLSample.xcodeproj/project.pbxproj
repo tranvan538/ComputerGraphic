@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B62221C20551EB400E17159 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2B62221A20551EB400E17159 /* Canvas.cpp */; };
 		2BBE64D2204B95F9008DC4A6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BBE64D1204B95F9008DC4A6 /* main.cpp */; };
 		2BBE64DA204B9660008DC4A6 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBE64D9204B9660008DC4A6 /* GLUT.framework */; };
 		2BBE64DC204B9676008DC4A6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BBE64DB204B9676008DC4A6 /* Cocoa.framework */; };
@@ -26,6 +27,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2B62221A20551EB400E17159 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
+		2B62221B20551EB400E17159 /* Canvas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Canvas.h; sourceTree = "<group>"; };
+		2B62221D20551EBE00E17159 /* supportClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = supportClass.h; sourceTree = "<group>"; };
 		2BBE64CE204B95F9008DC4A6 /* OpenGLSample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLSample; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BBE64D1204B95F9008DC4A6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2BBE64D9204B9660008DC4A6 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -67,6 +71,9 @@
 		2BBE64D0204B95F9008DC4A6 /* OpenGLSample */ = {
 			isa = PBXGroup;
 			children = (
+				2B62221D20551EBE00E17159 /* supportClass.h */,
+				2B62221A20551EB400E17159 /* Canvas.cpp */,
+				2B62221B20551EB400E17159 /* Canvas.h */,
 				2BBE64D1204B95F9008DC4A6 /* main.cpp */,
 			);
 			path = OpenGLSample;
@@ -140,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BBE64D2204B95F9008DC4A6 /* main.cpp in Sources */,
+				2B62221C20551EB400E17159 /* Canvas.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
