@@ -17,8 +17,9 @@
 
 #include "Canvas.h"
 
-Canvas canvas(600, 300, "Using Canvas");
+Canvas canvas(640, 640, "Draw Figure");
 
+void drawFigure();
 void display();
 
 int main(int argc, char** argv) {
@@ -26,6 +27,7 @@ int main(int argc, char** argv) {
     canvas.setColor(0.0, 0.0, 0.0);
     
     glutDisplayFunc(display);
+
     glutMainLoop();
     
     return 0;
@@ -34,24 +36,30 @@ int main(int argc, char** argv) {
 void display()
 {
     canvas.clearScreen();
-    //Draw a red triangle
-    canvas.setViewport(0, 300, 0, 300);
-    canvas.setWindow(0, 6, 0, 6);
-    canvas.setLineWidth(3.0);
-    canvas.setColor(1, 0, 0);
-    canvas.moveTo(1, 1);
-    canvas.lineTo(5, 1);
-    canvas.lineTo(3, 5);
-    canvas.lineTo(1, 1);
 
-    //Draw a blue square
-    canvas.setViewport(300, 600, 0,300);
-    canvas.setWindow(10, 70, 10, 70);
-    canvas.setLineWidth(6.0);
-    canvas.setColor(0, 0, 1);
-    canvas.moveTo(20, 20);
-    canvas.lineTo(60, 20);
-    canvas.lineTo(60, 60);
-    canvas.lineTo(20, 60);
-    canvas.lineTo(20, 20);
+    canvas.setViewport(320, 640, 320, 640);
+    canvas.setWindow(0, 2, 0, 2);
+    drawFigure();
+
+    canvas.setViewport(0, 320, 320, 640);
+    canvas.setWindow(2, 0, 0, 2);
+    drawFigure();
+
+    canvas.setViewport(0, 320, 0, 320);
+    canvas.setWindow(2, 0, 2, 0);
+    drawFigure();
+
+    canvas.setViewport(320, 640, 0, 320);
+    canvas.setWindow(0, 2, 2, 0);
+    drawFigure();
+}
+
+void drawFigure()
+{
+    canvas.setLineWidth(12);
+    canvas.moveTo(0, 2);
+    canvas.lineTo(1, 2);
+    canvas.lineTo(1, 1);
+    canvas.lineTo(2, 1);
+    canvas.lineTo(2, 0);
 }
