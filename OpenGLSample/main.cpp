@@ -38,10 +38,23 @@ int main(int argc, char** argv) {
 void polyspiral(int n, float angle, float length, float inc)
 {
     float len = length;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < 12; i++) {
         canvas.forward(len, 1);
+        canvas.forward(-len, 0);
         canvas.turn(angle);
-        len += inc;
+    }
+    canvas.forward(len, 1);
+
+    for (int j = 5; j > 0; j--) {
+        canvas.turn(angle);
+        canvas.forward(len, 1);
+        for (int i = 0; i < 12; i++) {
+            canvas.turn(j * angle);
+            canvas.forward(len, 1);
+            
+            canvas.turn((1 -j) * angle);
+            canvas.forward(len, 1);
+        }
     }
 }
 void display()
@@ -51,24 +64,6 @@ void display()
     canvas.setWindow(-10, 10, -10, 10);
     canvas.moveTo(0.0, 0.0);
     canvas.setCD(0.0);
-    canvas.setViewport(0, 300, 300, 600);
-    polyspiral(100, 60, 0.1, 0.07);
-    
-    canvas.setWindow(-10, 10, -10, 10);
-    canvas.setViewport(300, 600, 300, 600);
-    canvas.moveTo(0.0, 0.0);
-    canvas.setCD(0.0);
-    polyspiral(100, 89.5, 0.1, 0.11);
-    
-    canvas.setWindow(-10, 10, -10, 10);
-    canvas.setViewport(0, 300, 0, 300);
-    canvas.moveTo(0.0, 0.0);
-    canvas.setCD(0.0);
-    polyspiral(100, -144, 0.1, 0.16);
-    
-    canvas.setWindow(-10, 10, -10, 10);
-    canvas.setViewport(300, 600, 0, 300);
-    canvas.moveTo(0.0, 0.0);
-    canvas.setCD(0.0);
-    polyspiral(100, 170, 0.1, 0.16);
+    canvas.setViewport(0, 600, 0, 600);
+    polyspiral(100, 30, 2, 30);
 }
