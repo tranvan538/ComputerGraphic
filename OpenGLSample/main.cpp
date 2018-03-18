@@ -52,14 +52,6 @@ void display()
     canvas.setViewport(320, 640, 0, 320);
     canvas.setWindow(0, 2, 2, 0);
     drawFigure();
-    
-    canvas.setViewport(160, 480, 160, 480);
-    canvas.setWindow(1, 2, 1, 2);
-    drawFigure();
-
-    canvas.setViewport(160, 480, 160, 480);
-    canvas.setWindow(2, 1, 2, 1);
-    drawFigure();
 }
 
 void drawFigure()
