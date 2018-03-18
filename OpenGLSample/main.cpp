@@ -14,11 +14,15 @@
 
 #include <string.h>
 #include <cstdlib>
+#include <math.h>
 
 #include "Canvas.h"
 
-Canvas canvas(600, 300, "Using Canvas");
+#define PI               M_PI
 
+Canvas canvas(600, 600, "Using Polyspirals");
+
+void polyspiral(int n, float angle, float len0, float inc);
 void display();
 
 int main(int argc, char** argv) {
@@ -31,27 +35,40 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+void polyspiral(int n, float angle, float length, float inc)
+{
+    float len = length;
+    for (int i = 0; i < n; i++) {
+        canvas.forward(len, 1);
+        canvas.turn(angle);
+        len += inc;
+    }
+}
 void display()
 {
     canvas.clearScreen();
-    //Draw a red triangle
+    
+    canvas.setWindow(-10, 10, -10, 10);
+    canvas.moveTo(0.0, 0.0);
+    canvas.setCD(0.0);
+    canvas.setViewport(0, 300, 300, 600);
+    polyspiral(100, 60, 0.1, 0.07);
+    
+    canvas.setWindow(-10, 10, -10, 10);
+    canvas.setViewport(300, 600, 300, 600);
+    canvas.moveTo(0.0, 0.0);
+    canvas.setCD(0.0);
+    polyspiral(100, 89.5, 0.1, 0.11);
+    
+    canvas.setWindow(-10, 10, -10, 10);
     canvas.setViewport(0, 300, 0, 300);
-    canvas.setWindow(0, 6, 0, 6);
-    canvas.setLineWidth(3.0);
-    canvas.setColor(1, 0, 0);
-    canvas.moveTo(1, 1);
-    canvas.lineTo(5, 1);
-    canvas.lineTo(3, 5);
-    canvas.lineTo(1, 1);
-
-    //Draw a blue square
-    canvas.setViewport(300, 600, 0,300);
-    canvas.setWindow(10, 70, 10, 70);
-    canvas.setLineWidth(6.0);
-    canvas.setColor(0, 0, 1);
-    canvas.moveTo(20, 20);
-    canvas.lineTo(60, 20);
-    canvas.lineTo(60, 60);
-    canvas.lineTo(20, 60);
-    canvas.lineTo(20, 20);
+    canvas.moveTo(0.0, 0.0);
+    canvas.setCD(0.0);
+    polyspiral(100, -144, 0.1, 0.16);
+    
+    canvas.setWindow(-10, 10, -10, 10);
+    canvas.setViewport(300, 600, 0, 300);
+    canvas.moveTo(0.0, 0.0);
+    canvas.setCD(0.0);
+    polyspiral(100, 170, 0.1, 0.16);
 }
