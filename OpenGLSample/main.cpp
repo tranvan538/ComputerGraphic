@@ -12,13 +12,7 @@
 #include <GL/gl.h>
 #endif
 
-#include <string.h>
-#include <cstdlib>
-#include <math.h>
-
 #include "Canvas.h"
-
-#define PI               M_PI
 
 Canvas canvas(600, 600, "Using Polyspirals");
 
@@ -35,35 +29,50 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void polyspiral(int n, float angle, float length, float inc)
-{
+void polyspiral(int n, float angle, float length, float inc) {
     float len = length;
-    for (int i = 0; i < 12; i++) {
-        canvas.forward(len, 1);
-        canvas.forward(-len, 0);
-        canvas.turn(angle);
-    }
-    canvas.forward(len, 1);
-
-    for (int j = 5; j > 0; j--) {
-        canvas.turn(angle);
-        canvas.forward(len, 1);
-        for (int i = 0; i < 12; i++) {
-            canvas.turn(j * angle);
-            canvas.forward(len, 1);
+    
+    for (int i = 1; i <= n; i += 2)
+    {
+        for (int j = 0; j < 12; j++)
+        {
+            canvas.setColor(0.0, 0.0, 0.0);
+            canvas.turn((1 - i) * angle);
             
-            canvas.turn((1 -j) * angle);
             canvas.forward(len, 1);
+            canvas.turn(i * angle);
+            
+            canvas.forward(len, 1);
+            canvas.turn(180);
+            canvas.turn(-i * angle);
+            
+            canvas.forward(len, 1);
+            canvas.turn(i * angle);
+            
+            canvas.forward(len, 1);
+            canvas.setColor(1.0, 0.0, 0.0);
+            canvas.turn(180);
+            canvas.forward(len, 0);
+            canvas.turn(180);
+            canvas.turn((1 - i) * angle);
+            canvas.forward(len, 0);
+            canvas.turn(180);
+            canvas.turn((i - 1) * angle);
         }
+        
+        canvas.turn(angle);
+        canvas.forward(len, 0);
+        canvas.turn(angle);
+        canvas.forward(len, 0);
     }
 }
+
 void display()
 {
     canvas.clearScreen();
-    
-    canvas.setWindow(-10, 10, -10, 10);
-    canvas.moveTo(0.0, 0.0);
+    canvas.setWindow(-12, 12, -12, 12);
+    canvas.moveTo(0.0,0.0);
     canvas.setCD(0.0);
     canvas.setViewport(0, 600, 0, 600);
-    polyspiral(100, 30, 2, 30);
+    polyspiral(5, 30, 3, 3);
 }
